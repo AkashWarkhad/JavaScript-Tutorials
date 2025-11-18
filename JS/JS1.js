@@ -1,4 +1,4 @@
-//                          ##  Printing Diffrenet Types  ##
+//                          ##  Variables & Data Types   ##
 console.log("Hi this is Akash this side!!");
 console.log("How are you?");
 
