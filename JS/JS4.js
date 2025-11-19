@@ -1,9 +1,9 @@
-//                                      ARRAYS 
+//           #####################  ARRAYS   ##################### 
+console.log("#####################  ARRAYS   #####################");
 
-console.log("#################  Arrays ##################");
-let weekDays = ["Sun", "Mon", "Tues", "Wends", "Thurs", "Fri", "Sat"];
-let marks = ["36", "90", "100"];
-let info = ["Akash", 86, "XII", "Pass", "12233444"]
+let weekDays = ["Sun", "Mon", "Tues", "Wends", "Thurs", "Fri", "Sat"]; //string based Array
+let marks = ["36", "90", "100"];                                       // Number based Array
+let info = ["Akash", 86, "XII", "Pass", "12233444"]                   // Combination of both
 
 console.log(info);
 console.log(typeof(marks));
@@ -45,7 +45,7 @@ console.log(`Deleted Item: ${deletedInfo}`);
 
 // Convert array into string
 var stringArray = info.toString();
-console.log(`Array data in the string separted by comma = '${stringArray}'`);
+console.log(`When array converts into string then it comes with data separted by comma = '${stringArray}'`);
 console.log(`Length of stringArray : ${stringArray.length}`);
 
 // Concate the 2 arrays
@@ -54,27 +54,28 @@ let joinedArray = info.concat(marks);
 console.log(joinedArray);
 console.log(`size of the joinedArray ${joinedArray.length} == size of sum of info & marks ${info.length + marks.length}`);
 
-// unshift() Add to start
+// unshift() - Add to start
 
-var newLength = joinedArray.unshift("FirstData");
+let newLength = joinedArray.unshift("FirstData");
 console.log(joinedArray);
 
 // shift() deleted the first item
-var deletedFirstItem = joinedArray.shift();
+let deletedFirstItem = joinedArray.shift();
 console.log(deletedFirstItem);
 
 // Slice( ) : returns a piece of the array
-var pieceArray = joinedArray.slice(0, info.length);
+let pieceArray = joinedArray.slice(0, info.length);
 console.log(pieceArray);
 
 // Splice( ) : change original array (add, remove, replace)
 let arr = [0, 1, 2, 3, 4, 5, 6, 7];
 console.log(arr);
 
+// splice(StartIndex: 1, CountWhichNeedsToReplace: 3, ActualDataToBeRepaced : [10], 20, "Akash")
 arr.splice(1, 3, [10], 20, "Akash"); 
 console.log(arr);
 
-arr.splice(1, 3);
+arr.splice(1, 3); // Here From index 1 we have to replace nothing till 3 fields onwards means remove 2nd, 3rd & 4th values
 console.log(arr);
 
 // @@@@@@@@@@@@@@@@ Questions @@@@@@@@@@@@@@@@

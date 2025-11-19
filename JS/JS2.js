@@ -1,4 +1,5 @@
-//                                               Operator in the JS
+//           #####################  Operator in the JS   #####################                             
+console.log("#####################  Operator in the JS   #####################");
 
 // Alert on the page
 //alert("Alert : Lets begin:");
@@ -27,10 +28,10 @@ console.log("a ** b =", A ** B); // a to the power b
 let cnt = 0;
 console.log(cnt);
 
-cnt++ // ++cnt
+cnt++ // ++cnt post & Pre Increaments
 console.log("cnt++ =",cnt);
 
-cnt-- // --cnt
+cnt-- // --cnt  post & Pre Decreaments
 console.log("cnt-- =",cnt);
 
 // @@@@@@@@@@@@@  Asignment operator  @@@@@@@@@@@@@
@@ -40,7 +41,10 @@ console.log("x =", x);
 x += 1;
 console.log("x + = 1 =", x);
 
-// same of others operator
+x -= 1;
+console.log("x - = 1 =", x);
+
+// etc... same of others operator
 
 // @@@@@@@@@@@@@ Compairison Operator @@@@@@@@@@@@@
 
@@ -52,7 +56,7 @@ console.log("p = 4 & q = '4'");
 console.log("p == q", p == q); // True
 console.log("p != q", p != q); // False
 
-// To avoid the string & int value stictly use ===
+// To stictly add the dataType + (string & int etc..) value compairison pls use ===
 console.log("p === q", p === q); // False string != int
 console.log("p !== q", p !== q); // True
 
