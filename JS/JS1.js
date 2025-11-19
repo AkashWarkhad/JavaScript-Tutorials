@@ -1,4 +1,6 @@
-//                          ##  Variables & Data Types   ##
+//           #####################  Variables & Data Types   #####################
+console.log("#####################  Variables & Data Types   #####################");
+
 console.log("Hi this is Akash this side!!");
 console.log("How are you?");
 
@@ -85,10 +87,10 @@ console.log(Student.Age);  // 26
 let StudentCollection = 
 [
     {
-    Name: "Akash Warkhad",
-    Age: 25,
-    CGPA: 8.6,
-    IsPass: true
+        Name: "Akash Warkhad",
+        Age: 25,
+        CGPA: 8.6,
+        IsPass: true
     },
     {
         Name: "Shubham Warkhad",
@@ -97,5 +99,6 @@ let StudentCollection =
         IsPass: false
     }
 ]
+
 console.log(StudentCollection);
 console.log(typeof(StudentCollection)); // object
