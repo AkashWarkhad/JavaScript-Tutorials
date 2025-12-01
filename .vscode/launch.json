@@ -1,0 +1,27 @@
+{
+  // The version of the debugger configuration format (always 0.2.0)
+  "version": "0.2.0",
+
+  "configurations": [
+    {
+      // The name that appears in VS Code Run and Debug dropdown
+      "name": "Launch Chrome",
+
+      // Debugger type (pwa-chrome = modern Chrome debugger)
+      // Recommended by Microsoft (replaces old "chrome" type)
+      "type": "pwa-chrome",
+
+      // Debugger request type:
+      // "launch" = VS Code will start Chrome automatically
+      "request": "launch",
+
+      // The entry HTML file of your app
+      // VS Code will open this in Chrome
+      "file": "${workspaceFolder}/index.html",
+
+      // Set the root of your web project
+      // Used for resolving source files, breakpoints, etc.
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
