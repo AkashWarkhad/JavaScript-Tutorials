@@ -36,7 +36,7 @@ function getData(id, nextGetData)
 {
     // setTimeout(()=>
     //     {
-    //         console.log(id);
+    //         console.log("Fetched ID :", id);
     //         if(nextGetData)
     //         {
     //             nextGetData();
@@ -63,92 +63,96 @@ getData(1, ()=>
 //Promise is for “eventual” completion of task.
 //A JavaScript Promise object can be:
 
-//    Pending : the result is undefined
-let pendingPromise = new Promise((resolve, reject) =>{
-    console.log("Inprogres")
+// A   Pending : the result is undefined
+let pendingPromise = new Promise((resolve, reject) =>
+{
+    console.log("Inprogres");
 });
 console.log(pendingPromise);
 
-//    Resolved : the result is a value (fulfilled)
-let resolvedPromise = new Promise((resolved, reject) => {
+// B   Resolved : the result is a value (fulfilled)
+let resolvedPromise = new Promise((resolved, reject) => 
+{
     resolved("200 OK Success!");
     console.log("Promise Resolved");
 });
 console.log(resolvedPromise);
 
-//    Rejected : the result is an error object
-let rejectedPromise = new Promise((resolve, reject) => {
+// C   Rejected : the result is an error object
+let rejectedPromise = new Promise((resolve, reject) => 
+{
     console.log("Promise Rejected");
-    reject("400 Bad Request Failed!")
-})
+    reject("400 Bad Request Failed!");
+});
 console.log(rejectedPromise);
-
 
 // Example of the request is resolved after processing
 
-function GetBookingStatus(bId, nextGetBookingStatus)
-{
-    // return new Promise((resolve, reject)=> {
-    //     console.log("############### Fetching the BookingStatus...");
-    //     setTimeout(()=> {
-    //         resolve("200 OK Success!");
-    //         console.log("BookingStatus is CONFIRMED !!");
-    //         if(nextGetBookingStatus){
-    //             nextGetBookingStatus();
-    //         }
-    //     }, 3000);
-    // });
-}
+ function GetBookingStatus(bId, nextGetBookingStatus)
+ {
+      return new Promise((resolve, reject)=> 
+     {
+          console.log("############### Fetching the BookingStatus...");
+//          setTimeout(()=> 
+//         {
+//             console.log("BookingStatus is CONFIRMED !!");
+//             resolve("200 OK Success!");
+            
+//             if(nextGetBookingStatus)
+//             {
+//                 nextGetBookingStatus();
+//             }
+//          }, 30);
+      });
+ }
 
 // Call GetBookingStatus
 let initialPromise = GetBookingStatus("INDBID823283430");
 console.log("Initial Promise :", initialPromise); // O/P Pending
 
-// setTimeout(()=> {
-//     console.log("Get Promise Status after 3 second processing... :", initialPromise); // O/P Fulfilled 
-// }, 3000)
+//  setTimeout(()=> {
+//      console.log("Get Promise Status after 31 ms processing... :", initialPromise); // O/P Fulfilled 
+//  }, 31);
 
 
-// Once Promise is resolved then what? -> .then()
+// Once Promise is resolved then what? -> USE .then()
 const promise1 = ()=> 
+{
+    console.log("#### Promise1 Started!!");
+    return new Promise((resolve, reject) => 
     {
-        console.log("####Promise1 Started!!");
-        return new Promise((resolve, reject) => 
-        {
-            resolve("200 Ok Sucess");
-        })
+        resolve("200 Ok Sucess");
+    });
 };
 
-let fulfilledPromise = promise1();
-fulfilledPromise.then((res) => 
-    {
-        console.log("Promise1 fulfilled!", res);
-    });
+promise1().then((res) => 
+{
+    console.log("Promise1 fulfilled!", res);
+});
 
 // Once Promise is rejected then what? -> .catch()
-const promise2 = ()=> 
+const promise2 = () => 
+{
+    console.log("####Promise2 Started!!");
+    return new Promise((resolve, reject) => 
     {
-        console.log("####Promise2 Started!!");
-        return new Promise((resolve, reject) => 
-        {
-            reject("500 Server Error Failed");
-        })
-    };
+        reject("500 Server Error Failed");
+    })
+};
 
-// Call
-let failedPromise = promise2();
-
-failedPromise.catch((err) => 
+promise2().catch((err) => 
 {
     console.log("Promise2 rejected!", err);
 });
 
-
 // Calling/Executing query one after another using Promise
 
-let first = () => {
-    return new Promise((resolve, reject) =>{
-        setTimeout(()=> {
+let first = () => 
+{
+    return new Promise((resolve, reject) =>
+    {
+        setTimeout(()=> 
+        {
             resolve("First Resolved Successfully!!");
         }, 5000);
     });
@@ -157,7 +161,8 @@ let first = () => {
 let second = () => {
     return new Promise((resolve, reject) => 
     {
-        setTimeout(()=> {
+        setTimeout(()=> 
+        {
             resolve("Second Resolved Successfully!!");
         }, 5000);
     });
@@ -168,7 +173,7 @@ let second = () => {
 // first().then((res1)=> 
 // {
 //     console.log("First Promise :", res1);
-//     console.log("Fetching Second Prmoise..");
+//     console.log("Fetching Second Promise..");
 //     second().then((res2)=> 
 //     {
 //         console.log("Second Promise: ", res2);
@@ -177,30 +182,34 @@ let second = () => {
 
 //Method 2 :By Promise Chaining
 
-first()
-.then((res1)=>{
-    console.log("First Promise :", res1);
-    return second();
-})
-.then((res2)=> {
-    console.log("Second Promise: ", res2);
-});
-
-
+// first()
+// .then((res1)=>
+// {
+//     console.log("First Promise :", res1);
+//     return second();
+// })
+// .then((res2)=> 
+// {
+//     console.log("Second Promise: ", res2);
+// });
 
 // ################################## Async-Await ##################################
 //async function always returns a promise. await pauses the execution of its surrounding async function until the promise is settled.
 
-function GetData(id){
-    return new Promise((resolve, reject) => {
-        setTimeout(()=> {
-            console.log("Data Id: ", id);
+function GetData(id)
+{
+    return new Promise((resolve, reject) => 
+    {
+        setTimeout(()=> 
+        {
+            console.log("Fectched Data Id: ", id);
             resolve("200 Ok!");
         }, 2000);
-    })
+    });
 }
 
-async function GetAllDataAsync(){
+async function GetAllDataAsync()
+{
     console.log("Getting 1st BookingId :");
     await GetData(1);
 
@@ -213,29 +222,18 @@ async function GetAllDataAsync(){
 
 //GetAllDataAsync(); // Here we needs to call the GetData call inside the GetAllDataAsync()
 
-
-
 // ################### IIFE : Immediately Invoked Function Expression ####################################
 // IIFE is a function that is called immediately as soon as it is defined.
-// async function GetAllDataAsync(){
-// console.log("Getting 1st BookingId :");
-// await GetData(1);
 
-// console.log("Getting 2nd BookingId :");
-// await GetData(2);
+// Immdediatly call the the function & cannot be used again.
+// (async function()
+// {
+//     console.log("Getting 1st BookingId :");
+//     await GetData(1);
 
-// console.log("Getting 3rd BookingId :");
-// await GetData(3);
-// }
+//     console.log("Getting 2nd BookingId :");
+//     await GetData(2);
 
-// Immdediatly call the the function & cannot be used again
-(async function(){
-    console.log("Getting 1st BookingId :");
-    await GetData(1);
-
-    console.log("Getting 2nd BookingId :");
-    await GetData(2);
-
-    console.log("Getting 3rd BookingId :");
-    await GetData(3);
-})();
+//     console.log("Getting 3rd BookingId :");
+//     await GetData(3);
+// })();
