@@ -1,21 +1,23 @@
 //           #####################  Variables & Data Types   #####################
 console.log("#####################  Variables & Data Types   #####################");
 
-console.log("Hi this is Akash this side!!");
+console.log("Hi Akash this side!!");
 console.log("How are you?");
 
 //-------------------------------------------------------------------------------------
-//                    ##  Var keyword (Global Scope & Redeclared)  ##
+//                    ##  Var keyword (Global Scope & Can be redeclared)  ##
 var varFullName = "Akash";
 console.log(varFullName);
 
-var varFullName = "Akash Warkhad"
+var varFullName = "Akash Warkhad" // redeclared again
 console.log(varFullName);
 
 //-------------------------------------------------------------------------------------
 //                  ##  let keyword (Block Scope & Not allowed Redeclaration)
 let fullName = "Shubham";
-//let fullName = "sksm"; <- Redeclaration is not allowd in the let
+console.log(fullName);
+//let fullName = "sksm"; <- Redeclaration is not allowd in the 
+fullName = "Shubham Warkhad" // Updation allowed
 console.log(fullName);
 
 //-------------------------------------------------------------------------------------
@@ -39,33 +41,36 @@ console.log(b); // o/p : undefined
 
 // Primitive Types : Number, String, Boolean, Undefined, Null, BigInt, Symbol
 age = 10;
+console.log("DataType :", typeof(age)) // number
 console.log(age);
-console.log(typeof(age)) // number
 
 Name = "Akash"
+console.log("DataType : ", typeof(Name)); // string
 console.log(Name);
-console.log(typeof(Name)); // string
 
 flag = true;
+console.log("DataType : ",typeof(flag)); // boolean
 console.log(flag);
-console.log(typeof(flag)); // boolean
 
 let data;
-console.log(typeof(data)); // undefined
+console.log("DataType : ",typeof(data)); // undefined
+console.log(data);
 
 nullData = null;
+console.log("DataType : ",typeof(nullData)); // object
 console.log(nullData) // null
-console.log(typeof(nullData)); // object
 
-var value = BigInt("1234563456789");
+value = BigInt("1234563456789");
+console.log("DataType : ", typeof(value)); // bigint
 console.log(value); //1234563456789n
-console.log(typeof(value)); // bigint
 
-var sym = Symbol("Hii!");
+sym = Symbol("Hii!");
+console.log("DataType : ", typeof(sym)); //Symbol(Hii!)
 console.log(sym);
-console.log(typeof(sym)); //Symbol(Hii!)
 
-// Non Primitive Types : object / collection
+// ###################### Non Primitive Types : object, array/collection, function ######################
+console.log("############ Non Primitive Types :  object, array/collection, function ############");
+
 const Student = {
     Name: "Akash Warkhad",
     Age: 25,
@@ -73,8 +78,8 @@ const Student = {
     IsPass: true
 }
 
+console.log("DataType : ", typeof(Student));
 console.log(Student);
-console.log(typeof(Student)); // object
 console.log(Student["Name"]); // Akash Warkhad
 console.log(Student[Name]); // undefined XX 
 console.log(Student.Name);    // Akash Warkhad
@@ -84,7 +89,7 @@ Student.Age = Student.Age + 1;
 console.log(Student.Age);  // 26
 
 //-------------------------------------------------------------------------------------
-let StudentCollection = 
+let StudentArray = 
 [
     {
         Name: "Akash Warkhad",
@@ -100,5 +105,33 @@ let StudentCollection =
     }
 ]
 
-console.log(StudentCollection);
-console.log(typeof(StudentCollection)); // object
+console.log("DataType : ", typeof(StudentArray)); // object
+console.log("StudentCollection : ", StudentArray);
+console.log("Oth Collection : ", StudentArray[0]);
+console.log("Name : ", StudentArray[0].Name);
+
+console.log("Why Function is DataType in JS? ");
+console.log("Yes. Function is a special type of object in JavaScript. It is a first-class citizen, " +
+"meaning it can be assigned to variables, passed as arguments, and returned from other functions.");
+
+var func = function functionDataType() {
+    console.log("Function is also one of the dataType of JS.")
+}
+
+console.log("DataType of Function: ", typeof(func)); // function
+
+console.log("Primitive vs Reference (Very Important)");
+
+console.log("Primitive → Copy by Value Example:");
+let d1 = 10;
+let d2 = d1;
+d2 = 20;
+console.log(d1); // 10
+
+console.log("Reference → Copy by Reference Example: ");
+let obj1 = { name: "Akash" };
+let obj2 = obj1;
+
+obj2.name = "John";
+
+console.log(obj1.name); // "John"
