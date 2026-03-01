@@ -1,5 +1,5 @@
-//           #####################  Variables & Data Types   #####################
-console.log("#####################  Variables & Data Types   #####################");
+//           ##################### 1. Variables & Data Types   #####################
+console.log("##################### 1. Variables & Data Types   #####################");
 
 console.log("Hi Akash this side!!");
 console.log("How are you?");

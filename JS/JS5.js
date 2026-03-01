@@ -14,8 +14,9 @@ console.log(`Area of the rectangle: ${area}`);
 
 // @@@@@@ Arrow Functions (Compact way of writing a function)
 
-let ArrowArea = (length, width)=> {
-    console.log(`Length : ${length} & Width: ${width}`);
+let ArrowArea = (length, width) => 
+{
+    console.log(`With Arrow Function, Length : ${length} & Width: ${width}`);
     return length * width;
 }
 

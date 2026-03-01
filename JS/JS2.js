@@ -1,5 +1,5 @@
-//           #####################  Operator in the JS   #####################                             
-console.log("#####################  Operator in the JS   #####################");
+//           ##################### 2. Operator in the JS   #####################                             
+console.log("##################### 2. Operator in the JS   #####################");
 
 // Alert on the page
 //alert("Alert : Lets begin:");
@@ -8,7 +8,6 @@ console.log("#####################  Operator in the JS   #####################")
 
 /*Multiline comments 
 can be done by this way*/
-
 
 
 // @@@@@@@@@@@@@ Arthmetic Opearator  @@@@@@@@@@@@@
@@ -24,14 +23,14 @@ console.log("a / b =", A / B);
 console.log("a % (Modulo) b =", A % B); // show reminder
 console.log("a ** b =", A ** B); // a to the power b
 
-// @@@@@@@@@@@@@  Unary Operator  @@@@@@@@@@@@@
+// @@@@@@@@@@@@@  Unary Operator C++ / ++C  @@@@@@@@@@@@@
 let cnt = 0;
-console.log(cnt);
+console.log("Initially cnt =",cnt);
 
-cnt++ // ++cnt post & Pre Increaments
+cnt++ // ++cnt post Increaments
 console.log("cnt++ =",cnt);
 
-cnt-- // --cnt  post & Pre Decreaments
+cnt-- // --cnt  post Decreaments
 console.log("cnt-- =",cnt);
 
 // @@@@@@@@@@@@@  Asignment operator  @@@@@@@@@@@@@
