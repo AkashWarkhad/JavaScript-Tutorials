@@ -1,8 +1,11 @@
-.footer {
+/* Initial Style on Class */
+.class {
     color: blue;
     background-color: lightgreen;
 }
 
+/* Replaced Style from Class to newClass Using JS Manipulation from JS6 line 206 */
 .newClass {
     background-color: yellow;
+    color: red;
 }
