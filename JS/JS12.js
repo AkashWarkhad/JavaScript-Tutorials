@@ -1,74 +1,107 @@
-//           #####################  Callbacks, Promises & Async Await   #####################  
-window.console.log("#####################  Callbacks, Promises & Async Await   ##################### \n");
-// Note : UnComments code to run
-// async await >> promise chains >> callback hell
+/************************************************************
+ *  JavaScript Async Concepts
+ *  1. Callback
+ *  2. Callback Hell
+ *  3. Promise
+ *  4. Promise Chaining
+ *  5. Async / Await
+ *  6. IIFE (Immediately Invoked Function Expression)
+ ************************************************************/
 
-console.log("One");
-console.log("Two");
+console.log("##################### 12 JAVASCRIPT ASYNC CONCEPTS #####################\n");
+window.console.log(" ========== Callbacks, Promises & Async Await  ========== \n");
 
-// setTimeout(() =>
-//     {
-//     console.log("Print after 4 sec");  // Prints at the end 
-// }, 4000);
+/************************************************************
+ *  1️⃣ CALLBACK
+ *  A callback is a function passed as an argument
+ *  to another function and executed later.
+ * 
+ * > Problem we are solving:
+ *  - JavaScript is asynchronous.
+ *  - We don’t know when an async task finishes.
+ *  - So we pass a function (callback) to run after completion.
+ *
+ * > Problem:
+ *  - If we need multiple sequential async calls,
+ *  - code becomes nested and ugly & leads t0 callback hell.
+ ************************************************************/
 
-console.log("Three");
-console.log("Four");
+console.log("----- 1️⃣ CALLBACK -----");
 
-// ################################ Callbacks ################################
-// A callback is a function passed as an argument to another function.
-
-function sum(a, b)
+function add(a, b) 
 {
-    console.log("Sum :", a + b);
+  console.log("1️⃣ Simple CallBack Sum:", a + b);
 }
 
-function Calculator(a, b, callbackFun)
+function calculator(a, b, callback) 
 {
-    callbackFun(a, b);
+  //Your code & then Execute the callback function
+  callback(a, b);
 }
 
-Calculator(5, 10, sum); // Passed a & b with function which we want to call.
+// Passing function as argument
+calculator(5, 10, add);
 
-// ################################ Callback Hell ################################
-// Nested callbacks stacked below one another forming a pyramid structure.
 
-function getData(id, nextGetData)
+/************************************************************
+ *  2️⃣ CALLBACK HELL
+ *  Nested callbacks creating pyramid structure.
+ ************************************************************/
+
+console.log("\n----- 2️⃣ CALLBACK HELL -----");
+
+function fetchData(id, nextStep) 
 {
-    // setTimeout(()=>
-    //     {
-    //         console.log("Fetched ID :", id);
-    //         if(nextGetData)
-    //         {
-    //             nextGetData();
-    //         }
-    //     }, 2000);
-}
-
-// Calling hell
-getData(1, ()=>
+  setTimeout(() => 
     {
-        console.log("Fetching 2nd data...");
-        getData(2, ()=> 
-            {
-                console.log("Fetching 3rd data...");
-                getData(3, ()=> 
-                    {
-                        console.log("Fetching 4th data...");
-                        getData(4);
-                    })
-            });
-    });
+        console.log(`2️⃣ CallBack Hell: Fetched Data ID: ${id}`);
 
-// ################################ Promises ################################
-//Promise is for “eventual” completion of task.
-//A JavaScript Promise object can be:
+        if (nextStep) 
+        {
+            nextStep();
+        }
+    }, 0); // Temp set 0
+}
+
+// Calling: Nested structure (Pyramid)
+
+fetchData(1, () => {
+  fetchData(2, () => {
+    fetchData(3, () => {
+      fetchData(4);
+    });
+  });
+});
+
+console.log("2️⃣ Callback Hell Data Fetching completed!!");
+
+
+/************************************************************
+ *  3️⃣ PROMISE
+ *  Promise represents eventual completion of async task.
+ *  States:
+ *   - Pending
+ *   - Fulfilled
+ *   - Rejected
+ * > What improved?
+ *  - No more nested callbacks
+ *  - Better error handling
+ *  - Cleaner flow using .then()
+ *
+ * > Problem still remaining:
+ *  - Multiple .then() chains can still look messy
+ ************************************************************/
+
+console.log("\n----- 3️⃣ PROMISE -----");
+
+//Promise is for “eventual” completion of task. A JavaScript Promise object can be:
 
 // A   Pending : the result is undefined
-let pendingPromise = new Promise((resolve, reject) =>
+let pendingPromise = new Promise((resolved, reject) =>
 {
     console.log("Inprogres");
 });
-console.log(pendingPromise);
+console.log("pendingPromise: ",pendingPromise);
 
 // B   Resolved : the result is a value (fulfilled)
 let resolvedPromise = new Promise((resolved, reject) => 
@@ -76,164 +109,146 @@ let resolvedPromise = new Promise((resolved, reject) =>
     resolved("200 OK Success!");
     console.log("Promise Resolved");
 });
-console.log(resolvedPromise);
+console.log("resolvedPromise: ", resolvedPromise);
 
 // C   Rejected : the result is an error object
-let rejectedPromise = new Promise((resolve, reject) => 
+let rejectedPromise = new Promise((resolved, reject) => 
 {
     console.log("Promise Rejected");
     reject("400 Bad Request Failed!");
 });
-console.log(rejectedPromise);
+console.log("rejectedPromise: ", rejectedPromise);
 
-// Example of the request is resolved after processing
-
- function GetBookingStatus(bId, nextGetBookingStatus)
- {
-      return new Promise((resolve, reject)=> 
-     {
-          console.log("############### Fetching the BookingStatus...");
-//          setTimeout(()=> 
-//         {
-//             console.log("BookingStatus is CONFIRMED !!");
-//             resolve("200 OK Success!");
-            
-//             if(nextGetBookingStatus)
-//             {
-//                 nextGetBookingStatus();
-//             }
-//          }, 30);
-      });
- }
-
-// Call GetBookingStatus
-let initialPromise = GetBookingStatus("INDBID823283430");
-console.log("Initial Promise :", initialPromise); // O/P Pending
-
-//  setTimeout(()=> {
-//      console.log("Get Promise Status after 31 ms processing... :", initialPromise); // O/P Fulfilled 
-//  }, 31);
-
-
-// Once Promise is resolved then what? -> USE .then()
-const promise1 = ()=> 
+// Simple Promise Example
+function getBookingStatus(bookingId) 
 {
-    console.log("#### Promise1 Started!!");
-    return new Promise((resolve, reject) => 
+  return new Promise((resolve, reject) => 
     {
-        resolve("200 Ok Sucess");
-    });
-};
+        console.log("3️⃣Promise: Fetching booking status...");
 
-promise1().then((res) => 
-{
-    console.log("Promise1 fulfilled!", res);
-});
+        setTimeout(() => 
+        {
+            const isConfirmed = Math.random() < 0.5;
 
-// Once Promise is rejected then what? -> .catch()
-const promise2 = () => 
-{
-    console.log("####Promise2 Started!!");
-    return new Promise((resolve, reject) => 
+            if (isConfirmed) 
+            {
+                resolve(`3️⃣Promise: Booking ${bookingId} CONFIRMED`);
+            } else 
+            {
+                reject(`3️⃣Promise: Booking ${bookingId} FAILED`);
+            }
+        }, 0);
+  });
+}
+
+// Using .then() and .catch()
+getBookingStatus("INDBID123")
+  .then((result) => 
     {
-        reject("500 Server Error Failed");
+        console.log("3️⃣Promise: SUCCESS:", result);
     })
-};
-
-promise2().catch((err) => 
-{
-    console.log("Promise2 rejected!", err);
-});
-
-// Calling/Executing query one after another using Promise
-
-let first = () => 
-{
-    return new Promise((resolve, reject) =>
+  .catch((error) => 
     {
-        setTimeout(()=> 
-        {
-            resolve("First Resolved Successfully!!");
-        }, 5000);
+        console.log("3️⃣Promise: ERROR:", error);
     });
-}
 
-let second = () => {
-    return new Promise((resolve, reject) => 
-    {
-        setTimeout(()=> 
-        {
-            resolve("Second Resolved Successfully!!");
-        }, 5000);
-    });
-}
 
-//Method 1:  Call Promise
-// console.log("Fetching first Promise..");
-// first().then((res1)=> 
-// {
-//     console.log("First Promise :", res1);
-//     console.log("Fetching Second Promise..");
-//     second().then((res2)=> 
-//     {
-//         console.log("Second Promise: ", res2);
-//     })
-// });
+/************************************************************
+ *  4️⃣ PROMISE CHAINING
+ *  Execute async tasks sequentially
+ ************************************************************/
 
-//Method 2 :By Promise Chaining
+console.log("\n----- 4️⃣ PROMISE CHAINING -----");
 
-// first()
-// .then((res1)=>
-// {
-//     console.log("First Promise :", res1);
-//     return second();
-// })
-// .then((res2)=> 
-// {
-//     console.log("Second Promise: ", res2);
-// });
-
-// ################################## Async-Await ##################################
-//async function always returns a promise. await pauses the execution of its surrounding async function until the promise is settled.
-
-function GetData(id)
+function firstTask() 
 {
     return new Promise((resolve, reject) => 
     {
-        setTimeout(()=> 
+        setTimeout(() => 
         {
-            console.log("Fectched Data Id: ", id);
-            resolve("200 Ok!");
-        }, 2000);
+            resolve("4️⃣Promise chaining: First Task Completed");
+        }, 0);
     });
 }
 
-async function GetAllDataAsync()
+function secondTask() 
 {
-    console.log("Getting 1st BookingId :");
-    await GetData(1);
-
-    console.log("Getting 2nd BookingId :");
-    await GetData(2);
-
-    console.log("Getting 3rd BookingId :");
-    await GetData(3);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("4️⃣Promise chaining: Second Task Completed");
+    }, 0);
+  });
 }
 
-//GetAllDataAsync(); // Here we needs to call the GetData call inside the GetAllDataAsync()
+// Chain promises
+firstTask()
+  .then((res1) => 
+    {
+        console.log(res1);
+        return secondTask(); // return next promise
+    })
+  .then((res2) => 
+    {
+        console.log(res2);
+    })
+  .catch((err) => 
+    {
+        console.log("4️⃣Promise chaining: Error in chain:", err);
+    });
 
-// ################### IIFE : Immediately Invoked Function Expression ####################################
-// IIFE is a function that is called immediately as soon as it is defined.
+/************************************************************
+ *  5️⃣ ASYNC / AWAIT
+ *  Cleaner way to handle Promises
+ *  async → always returns a promise
+ *  await → pauses execution until resolved
+ * 
+ * > What improved over Promise?
+ *  - Looks synchronous
+ *  - Easier to read
+ *  - Easier to debug
+ *  - Works naturally with try/catch
+ ************************************************************/
 
-// Immdediatly call the the function & cannot be used again.
-// (async function()
-// {
-//     console.log("Getting 1st BookingId :");
-//     await GetData(1);
+console.log("\n----- 5️⃣ ASYNC / AWAIT -----");
 
-//     console.log("Getting 2nd BookingId :");
-//     await GetData(2);
+function fetchBooking(id)
+{
+  return new Promise((resolve, reject) => 
+    {
+        setTimeout(() => 
+        {
+            console.log("5️⃣Async-Await: Fetched Booking ID:", id);
+            resolve();
+        }, 0);
+    });
+}
 
-//     console.log("Getting 3rd BookingId :");
-//     await GetData(3);
-// })();
+async function fetchAllBookings() 
+{
+  console.log("5️⃣Async-Await: Starting Booking Fetch...");
+
+  await fetchBooking(1);
+  await fetchBooking(2);
+  await fetchBooking(3);
+
+  console.log("5️⃣Async-Await: All bookings fetched successfully!");
+}
+
+// Call async function
+fetchAllBookings();
+
+
+/************************************************************
+ *  6️⃣ IIFE (Immediately Invoked Function Expression)
+ *  Function that runs immediately after definition
+ ************************************************************/
+
+(async function () 
+{
+  console.log("\n----- 6️⃣ ASYNC IIFE -----");
+
+  await fetchBooking("6️⃣IIFE: A1");
+  await fetchBooking("6️⃣IIFE: A2");
+
+  console.log("6️⃣IIFE: execution completed!");
+})();
